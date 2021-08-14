@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delet & Confirm</title>
+    <style>
+        input {
+            width: 25%;
+            padding: 8px;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 25px;
+            margin: 0 10px;
+        }
+
+        button:disabled {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Delete Element With Confirmation</h1>
+    <section>
+        <h3 id="secret-line">I Will delete this line With Confirmation...</h3>
+        <input type="text" placeholder="Type -delete- for Confirmation" id="confirmation">
+        <button id="delete-btn">Delete</button>
+    </section>
+
+    <script>
+        const deleteButton = document.getElementById('delete-btn');
+        const secretLine = document.getElementById('secret-line');
+        const userConfirm = document.getElementById('confirmation');
+        deleteButton.setAttribute('disabled', true);
+
+        // Focus
+        userConfirm.addEventListener('focus', function () {
+            document.body.style.backgroundColor = 'crimson';
+        })
+
+        // Blur
+        userConfirm.addEventListener('blur', function () {
+            document.body.style.backgroundColor = 'white';
+            userConfirm.value = '';
+        })
+
+        // Keyup
+        userConfirm.addEventListener('keyup', function (event) {
+            if (event.target.value == 'delete') {
+                deleteButton.removeAttribute('disabled');
+                deleteButton.addEventListener('click', function () {
+                    secretLine.style.display = 'none';
+                })
+            }
+            else {
+                deleteButton.setAttribute('disabled', true);
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
